@@ -167,7 +167,7 @@ public class EmployeeController {
 		return response;
 	}
 	
-	@GetMapping(value = "/loantypes	", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	@GetMapping(value = "/loantypes", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO getAllLoanTypes() {
 		ResponseDTO response = new ResponseDTO();
 		response.setResponse(service.getAllLoanTypes());
