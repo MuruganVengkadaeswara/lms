@@ -30,7 +30,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public Employee getEmployee(String searchText) {
+	public List<Employee> getEmployee(String searchText) {
 		EntityManager manager = factory.createEntityManager();
 		TypedQuery<Employee> query = manager.createQuery(
 				"FROM Employee e WHERE email LIKE : pattern OR lastname LIKE : pattern OR firstname LIKE : pattern",
@@ -40,7 +40,7 @@ public class AdminDAOImpl implements AdminDAO {
 		if (employeeList.isEmpty()) {
 			return null;
 		} else {
-			return employeeList.get(0);
+			return employeeList;
 		}
 
 	}

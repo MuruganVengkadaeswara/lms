@@ -11,7 +11,7 @@ public interface AdminDAO {
 
 	public Employee addEmployee(Employee employee);
 	
-	public Employee getEmployee(String searchText);
+	public List<Employee> getEmployee(String searchText);
 
 	public Employee updateEmployee(Employee employee);
 

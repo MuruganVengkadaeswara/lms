@@ -28,8 +28,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Employee getEmployee(String searchText) {
-		Employee empDto = admindao.getEmployee(searchText);
+	public List<Employee> getEmployee(String searchText) {
+		List<Employee> empDto = admindao.getEmployee(searchText);
 		if (empDto != null) {
 			return empDto;
 		} else {
