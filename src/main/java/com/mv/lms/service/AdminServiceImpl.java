@@ -98,4 +98,15 @@ public class AdminServiceImpl implements AdminService {
 			throw new LoanException("unable to get role");
 		}
 	}
+
+	@Override
+	public List<Role> getAllRoles() {
+		List<Role> roleList = admindao.getAllRoles();
+		if(roleList != null) {
+			return roleList;
+		}
+		else {
+			throw new LoanException("unable to get all roles");
+		}
+	}
 }

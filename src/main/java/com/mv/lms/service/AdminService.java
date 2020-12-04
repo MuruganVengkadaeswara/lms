@@ -26,5 +26,7 @@ public interface AdminService {
 	public Role updateRole(Role role);
 	
 	public Role getRole(int id);
+	
+	public List<Role> getAllRoles();
 
 }

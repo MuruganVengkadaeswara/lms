@@ -87,6 +87,16 @@ public class AdminController {
 		return response;
 	}
 	
+	@GetMapping(value = "/roles", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseDTO getAllRoles(@PathVariable int id) {
+		ResponseDTO response = new ResponseDTO();
+		response.setResponse(service.getAllRoles());
+		return response;
+	}
+	
+	
+	
 	
 	
 

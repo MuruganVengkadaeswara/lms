@@ -26,4 +26,6 @@ public interface AdminDAO {
 	public Role updateRole(Role role);
 	
 	public Role getRole(int roleId);
+	
+	public List<Role> getAllRoles();
 }
