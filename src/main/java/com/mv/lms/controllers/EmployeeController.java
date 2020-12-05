@@ -30,7 +30,7 @@ public class EmployeeController {
 
 	@GetMapping(value = "/application/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public ResponseDTO getApplication(Long id) {
+	public ResponseDTO getApplication(@PathVariable Long id) {
 		ResponseDTO response = new ResponseDTO();
 		response.setResponse(service.getApplication(id));
 		return response;
