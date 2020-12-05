@@ -28,11 +28,11 @@ public class EmployeeController {
 	@Autowired
 	public EmployeeService service;
 
-	@GetMapping(value = "/application", produces = { MediaType.APPLICATION_JSON_VALUE,
+	@GetMapping(value = "/application/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public ResponseDTO getApplication(long applicationid) {
+	public ResponseDTO getApplication(long id) {
 		ResponseDTO response = new ResponseDTO();
-		response.setResponse(service.getApplication(applicationid));
+		response.setResponse(service.getApplication(id));
 		return response;
 
 	}
