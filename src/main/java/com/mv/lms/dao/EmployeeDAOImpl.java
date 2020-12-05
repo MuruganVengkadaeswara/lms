@@ -25,7 +25,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	EntityManagerFactory factory;
 
 	@Override
-	public LoanApplication getApplication(long applicationId) {
+	public LoanApplication getApplication(Long applicationId) {
 		EntityManager manager = factory.createEntityManager();
 		LoanApplication application = manager.find(LoanApplication.class, applicationId);
 		manager.close();

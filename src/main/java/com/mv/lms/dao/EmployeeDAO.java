@@ -12,7 +12,7 @@ import com.mv.lms.entities.OverdueLoan;
 public interface EmployeeDAO {
 
 	// Application operations
-	public LoanApplication getApplication(long applicationId);
+	public LoanApplication getApplication(Long applicationId);
 
 	public LoanStatus updateApplicationStatus(LoanStatus status);
 

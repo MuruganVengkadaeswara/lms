@@ -21,7 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public EmployeeDAO employeedao;
 
 	@Override
-	public LoanApplication getApplication(long applicationId) {
+	public LoanApplication getApplication(Long applicationId) {
 		LoanApplication applicationDto = employeedao.getApplication(applicationId);
 		if (applicationDto != null) {
 			return applicationDto;
