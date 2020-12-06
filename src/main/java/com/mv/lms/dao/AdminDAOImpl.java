@@ -104,6 +104,7 @@ public class AdminDAOImpl implements AdminDAO {
 		if (role1 != null) {
 			manager.getTransaction().begin();
 			BeanUtils.copyProperties(role, role1);
+			manager.getTransaction().commit();
 			return role1;
 		} else {
 			return null;
