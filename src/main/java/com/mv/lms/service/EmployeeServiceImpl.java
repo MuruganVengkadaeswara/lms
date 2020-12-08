@@ -31,12 +31,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public LoanStatus updateApplicationStatus(LoanStatus status) {
-		LoanStatus statusDto = employeedao.updateApplicationStatus(status);
+	public LoanStatus updateApplicationStatus(Long id) {
+		LoanStatus statusDto = employeedao.updateApplicationStatus(id);
 		if (statusDto != null) {
 			return statusDto;
 		} else {
-			throw new LoanException("unable to update application");
+			throw new LoanException("unable to update application status");
 		}
 	}
 
@@ -247,6 +247,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 			return list;
 		} else {
 			throw new LoanException("Unable to get Loan Types");
+		}
+	}
+
+	@Override
+	public List<LoanApplication> getAllApplications() {
+		List<LoanApplication> list = employeedao.getAllApplications();
+		if (!list.isEmpty()) {
+			return list;
+		} else {
+			throw new LoanException("Unable to fetch all loans applications");
+		}
+	}
+
+	@Override
+	public LoanApplication deleteApplication(Long applicationId) {
+		LoanApplication app = employeedao.deleteApplication(applicationId);
+		if (app != null) {
+			return app;
+		} else {
+			throw new LoanException("Unable to delete application");
 		}
 	}
 

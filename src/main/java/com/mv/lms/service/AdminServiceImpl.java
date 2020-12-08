@@ -109,4 +109,15 @@ public class AdminServiceImpl implements AdminService {
 			throw new LoanException("unable to get all roles");
 		}
 	}
+
+	@Override
+	public Employee getEmployeeById(int employeeId) {
+		Employee empDto = admindao.getEmployeeById(employeeId);
+		if(empDto != null) {
+			return empDto;
+		}
+		else {
+			throw new LoanException("Unable to fetch employee");
+		}
+	}
 }

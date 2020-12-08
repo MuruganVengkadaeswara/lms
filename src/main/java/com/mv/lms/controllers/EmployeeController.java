@@ -34,14 +34,29 @@ public class EmployeeController {
 		ResponseDTO response = new ResponseDTO();
 		response.setResponse(service.getApplication(id));
 		return response;
-
+	}
+	
+	@GetMapping(value = "/applications", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseDTO getAllApplications() {
+		ResponseDTO response = new ResponseDTO();
+		response.setResponse(service.getAllApplications());
+		return response;
+	}
+	
+	@DeleteMapping(value = "/application/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseDTO deleteApplication(@PathVariable Long id) {
+		ResponseDTO response = new ResponseDTO();
+		response.setResponse(service.deleteApplication(id));
+		return response;
 	}
 
-	@PutMapping(value = "/manage-loanstatus", produces = { MediaType.APPLICATION_JSON_VALUE,
+	@PutMapping(value = "/manage-loanstatus/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public ResponseDTO updateApplicationStatus(@RequestBody LoanStatus status) {
+	public ResponseDTO updateApplicationStatus(@PathVariable Long id) {
 		ResponseDTO response = new ResponseDTO();
-		response.setResponse(service.updateApplicationStatus(status));
+		response.setResponse(service.updateApplicationStatus(id));
 		return response;
 	}
 
@@ -166,14 +181,14 @@ public class EmployeeController {
 		response.setResponse(service.getLoanType(id));
 		return response;
 	}
-	
+
 	@GetMapping(value = "/loantypes", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO getAllLoanTypes() {
 		ResponseDTO response = new ResponseDTO();
 		response.setResponse(service.getAllLoanTypes());
 		return response;
 	}
-	
+
 	// OverDueLoan operations
 
 	@GetMapping(value = "/overdueloans/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,

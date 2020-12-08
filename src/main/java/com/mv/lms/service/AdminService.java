@@ -18,6 +18,8 @@ public interface AdminService {
 	public List<Employee> getAllEmployees();
 
 	public Employee deleteEmployee(int employeeId);
+	
+	public Employee getEmployeeById(int employeeId);
 
 	// Roles operations
 

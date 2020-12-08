@@ -40,6 +40,16 @@ public class AdminController {
 		return response;
 
 	}
+	@GetMapping(value = "/employees/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseDTO getEmployee(@PathVariable Integer id) {
+		ResponseDTO response = new ResponseDTO();
+		response.setResponse(service.getEmployeeById(id));
+		return response;
+
+	}
+	
+	
 
 	@PutMapping(value = "/employee", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO updateEmployee(@RequestBody Employee employee) {

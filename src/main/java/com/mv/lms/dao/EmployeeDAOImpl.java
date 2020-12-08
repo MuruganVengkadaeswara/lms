@@ -33,12 +33,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public LoanStatus updateApplicationStatus(LoanStatus status) {
+	public LoanStatus updateApplicationStatus(Long id) {
 		EntityManager manager = factory.createEntityManager();
-		LoanStatus status1 = manager.find(LoanStatus.class, status.getStatusId());
+		LoanApplication application = manager.find(LoanApplication.class, id);
+		LoanStatus status1 = manager.find(LoanStatus.class, application.getStatus().getStatusId());
 		if (status1 != null) {
 			manager.getTransaction().begin();
-			BeanUtils.copyProperties(status, status1, "loanStatusId");
+			status1.setStatus("Approved");
+//			BeanUtils.copyProperties(status, status1, "loanStatusId");
 			manager.getTransaction().commit();
 			manager.close();
 			return status1;
@@ -70,7 +72,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	public List<LoanApplication> getApprovedApplications() {
 
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<LoanStatus> query1 = manager.createQuery("FROM LoanStatus where status='approved'", LoanStatus.class);
+		TypedQuery<LoanStatus> query1 = manager.createQuery("FROM LoanStatus where status='approved'",
+				LoanStatus.class);
 		List<LoanStatus> statusList = query1.getResultList();
 		List<LoanApplication> list = new ArrayList<>();
 		TypedQuery<LoanApplication> query = manager.createQuery("FROM LoanApplication where statusid = :id",
@@ -192,7 +195,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		LoanType type = manager.find(LoanType.class, loantype.getLoanTypeId());
 		if (type != null) {
 			manager.getTransaction().begin();
-			BeanUtils.copyProperties(loantype, type,"LoanTypeId");
+			BeanUtils.copyProperties(loantype, type, "LoanTypeId");
 			manager.getTransaction().commit();
 			manager.close();
 			return type;
@@ -304,6 +307,31 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		List<LoanType> list = query.getResultList();
 		manager.close();
 		return list;
+	}
+
+	@Override
+	public List<LoanApplication> getAllApplications() {
+
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<LoanApplication> query = manager.createQuery("From LoanApplication", LoanApplication.class);
+		List<LoanApplication> list = query.getResultList();
+		manager.close();
+		return list;
+	}
+
+	@Override
+	public LoanApplication deleteApplication(Long applicationId) {
+		EntityManager manager = factory.createEntityManager();
+		LoanApplication app = manager.find(LoanApplication.class, applicationId);
+		if (app != null) {
+			manager.getTransaction().begin();
+			manager.remove(app);
+			manager.getTransaction().commit();
+			return app;
+		} else {
+			return null;
+		}
+
 	}
 
 }

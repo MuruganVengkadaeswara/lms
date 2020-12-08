@@ -14,11 +14,15 @@ public interface EmployeeDAO {
 	// Application operations
 	public LoanApplication getApplication(Long applicationId);
 
-	public LoanStatus updateApplicationStatus(LoanStatus status);
+	public LoanStatus updateApplicationStatus(Long id);
 
 	public List<LoanApplication> getPendingApplications();
 
 	public List<LoanApplication> getApprovedApplications();
+	
+	public List<LoanApplication> getAllApplications();
+	
+	public LoanApplication deleteApplication(Long applicationId);
 
 	// Loan Operations
 	public Loan addLoan(Loan loan);

@@ -130,16 +130,32 @@ public class AdminDAOImpl implements AdminDAO {
 
 	@Override
 	public List<Role> getAllRoles() {
-		
+
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Role> query = manager.createQuery("FROM Role",Role.class);
+		TypedQuery<Role> query = manager.createQuery("FROM Role", Role.class);
 		List<Role> roleList = query.getResultList();
-		if(roleList.isEmpty()) {
+		if (roleList.isEmpty()) {
+			manager.close();
+			return null;
+		} else {
+			manager.close();
+			return roleList;
+		}
+	}
+
+	@Override
+	public Employee getEmployeeById(int employeeId) {
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<Employee> query = manager.createQuery("FROM Employee where employeeId = : eid", Employee.class);
+		query.setParameter("eid", employeeId);
+		List<Employee> resultlist = query.getResultList();
+		if(resultlist.isEmpty()) {
 			manager.close();
 			return null;
 		}
 		else {
-			return roleList;
+			manager.close();
+			return resultlist.get(0);
 		}
 	}
 

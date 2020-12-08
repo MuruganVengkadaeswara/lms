@@ -16,6 +16,8 @@ public interface AdminDAO {
 	public Employee updateEmployee(Employee employee);
 
 	public List<Employee> getAllEmployees();
+	
+	public Employee getEmployeeById(int employeeId);
 
 	public Employee deleteEmployee(int employeeId);
 
