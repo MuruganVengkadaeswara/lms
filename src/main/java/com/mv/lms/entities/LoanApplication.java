@@ -2,6 +2,7 @@ package com.mv.lms.entities;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -97,7 +99,8 @@ public class LoanApplication {
 	@Column(name="empl_type")
 	private String emplType;
 
-	@OneToOne
+//	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "statusId")
 	private LoanStatus status;
 

@@ -1,6 +1,7 @@
 package com.mv.lms.entities;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ public class LoanStatus {
 	private long statusId;
 
 //	@NotNull
-	private String status = "pending";
+	private String status;
 
 //	@NotNull
 	@Column(name = "application_category")

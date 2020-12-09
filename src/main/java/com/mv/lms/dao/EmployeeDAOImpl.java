@@ -33,14 +33,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public LoanStatus updateApplicationStatus(Long id) {
+	public LoanStatus updateApplicationStatus(Long id, LoanStatus status) {
 		EntityManager manager = factory.createEntityManager();
 		LoanApplication application = manager.find(LoanApplication.class, id);
 		LoanStatus status1 = manager.find(LoanStatus.class, application.getStatus().getStatusId());
 		if (status1 != null) {
 			manager.getTransaction().begin();
 			status1.setStatus("Approved");
-//			BeanUtils.copyProperties(status, status1, "loanStatusId");
+			BeanUtils.copyProperties(status, status1, "loanStatusId");
 			manager.getTransaction().commit();
 			manager.close();
 			return status1;
@@ -53,10 +53,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public List<LoanApplication> getPendingApplications() {
-
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<LoanStatus> query1 = manager.createQuery("FROM LoanStatus where status='pending'", LoanStatus.class);
+		TypedQuery<LoanStatus> query1 = manager.createQuery("FROM LoanStatus where status='pndg'", LoanStatus.class);
 		List<LoanStatus> statusList = query1.getResultList();
+		System.err.println(statusList);
 		List<LoanApplication> list = new ArrayList<>();
 		TypedQuery<LoanApplication> query = manager.createQuery("FROM LoanApplication where statusid = :id",
 				LoanApplication.class);
@@ -64,6 +64,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			query.setParameter("id", status.getStatusId());
 			list.add(query.getSingleResult());
 		}
+		System.err.println(list);
 		manager.close();
 		return list;
 	}
@@ -75,6 +76,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		TypedQuery<LoanStatus> query1 = manager.createQuery("FROM LoanStatus where status='approved'",
 				LoanStatus.class);
 		List<LoanStatus> statusList = query1.getResultList();
+		System.err.println(statusList);
+
 		List<LoanApplication> list = new ArrayList<>();
 		TypedQuery<LoanApplication> query = manager.createQuery("FROM LoanApplication where statusid = :id",
 				LoanApplication.class);
@@ -82,6 +85,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			query.setParameter("id", status.getStatusId());
 			list.add(query.getSingleResult());
 		}
+		System.err.println(list);
 		manager.close();
 		return list;
 	}
@@ -178,6 +182,22 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		List<Client> clientList = query.getResultList();
 		manager.close();
 		return clientList;
+	}
+
+	@Override
+	public Client getClientByEmail(String emailid) {
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<Client> query = manager.createQuery("FROM Client where email= : id",Client.class);
+		query.setParameter("id", emailid);
+		List<Client> list = query.getResultList();
+		if(list.isEmpty()) {
+			manager.close();
+			return null;
+		}
+		else {
+			manager.close();
+			return list.get(0);
+		}
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public interface EmployeeService {
 	// Application operations
 	public LoanApplication getApplication(Long applicationId);
 
-	public LoanStatus updateApplicationStatus(Long id);
+	public LoanStatus updateApplicationStatus(Long id,LoanStatus status);
 
 	public List<LoanApplication> getPendingApplications();
 
@@ -43,6 +43,8 @@ public interface EmployeeService {
 	public Client deleteClient(long clientid);
 
 	public Client getClient(long clientid);
+	
+	public Client getClientByEmail(String emailid);
 
 	public List<Client> getAllClients();
 

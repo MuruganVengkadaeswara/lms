@@ -31,8 +31,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public LoanStatus updateApplicationStatus(Long id) {
-		LoanStatus statusDto = employeedao.updateApplicationStatus(id);
+	public LoanStatus updateApplicationStatus(Long id, LoanStatus status) {
+		LoanStatus statusDto = employeedao.updateApplicationStatus(id, status);
 		if (statusDto != null) {
 			return statusDto;
 		} else {
@@ -137,6 +137,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 			return list;
 		} else {
 			throw new LoanException("unable to get clients");
+		}
+	}
+
+	@Override
+	public Client getClientByEmail(String emailid) {
+		Client cli = employeedao.getClientByEmail(emailid);
+		if (cli != null) {
+			return cli;
+		} else {
+			throw new LoanException("unable to get client");
 		}
 	}
 

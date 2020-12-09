@@ -35,7 +35,7 @@ public class EmployeeController {
 		response.setResponse(service.getApplication(id));
 		return response;
 	}
-	
+
 	@GetMapping(value = "/applications", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO getAllApplications() {
@@ -43,7 +43,7 @@ public class EmployeeController {
 		response.setResponse(service.getAllApplications());
 		return response;
 	}
-	
+
 	@DeleteMapping(value = "/application/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO deleteApplication(@PathVariable Long id) {
@@ -54,9 +54,9 @@ public class EmployeeController {
 
 	@PutMapping(value = "/manage-loanstatus/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public ResponseDTO updateApplicationStatus(@PathVariable Long id) {
+	public ResponseDTO updateApplicationStatus(@PathVariable Long id, @RequestBody LoanStatus status) {
 		ResponseDTO response = new ResponseDTO();
-		response.setResponse(service.updateApplicationStatus(id));
+		response.setResponse(service.updateApplicationStatus(id, status));
 		return response;
 	}
 
@@ -150,6 +150,14 @@ public class EmployeeController {
 		return response;
 
 	}
+	
+//	@GetMapping(value = "/clients/{email}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+//	public ResponseDTO getClientByEmail() {
+//		ResponseDTO response = new ResponseDTO(@PathVariable String email);
+//		response.setResponse(service.getAllClients());
+//		return response;
+//
+//	}
 
 	// Loan types operations
 
