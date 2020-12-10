@@ -1,5 +1,7 @@
 package com.mv.lms.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,26 @@ public class ClientServiceImpl implements ClientService {
 		Payment paymentDto = clientdao.getPaymentDetails(paymentId);
 		if (paymentDto != null) {
 			return paymentDto;
+		} else {
+			throw new LoanException("Unable to get Payment details");
+		}
+	}
+
+	@Override
+	public List<Loan> getAllLoans(Long clientId) {
+		List<Loan> list = clientdao.getAllLoans(clientId);
+		if (!list.isEmpty()) {
+			return list;
+		} else {
+			throw new LoanException("Unable to get all loan details");
+		}
+	}
+
+	@Override
+	public List<Payment> getPayments(Long loanId) {
+		List<Payment> list = clientdao.getPayments(loanId);
+		if (!list.isEmpty()) {
+			return list;
 		} else {
 			throw new LoanException("Unable to get Payment details");
 		}

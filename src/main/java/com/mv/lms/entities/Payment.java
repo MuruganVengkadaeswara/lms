@@ -38,7 +38,7 @@ public class Payment {
 	@Column(name = "loanId")
 	private long loanId;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date paidOn;
 
 	private long fines;

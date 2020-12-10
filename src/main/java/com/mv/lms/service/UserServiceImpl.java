@@ -78,4 +78,15 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public User updateUser(User user) {
+		User user1 = userdao.updateUser(user);
+		if (user1 != null) {
+			return user1;
+		} else {
+			throw new LoanException("Unable to update User");
+		}
+
+	}
+
 }

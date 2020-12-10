@@ -187,14 +187,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public Client getClientByEmail(String emailid) {
 		EntityManager manager = factory.createEntityManager();
-		TypedQuery<Client> query = manager.createQuery("FROM Client where email= : id",Client.class);
+		TypedQuery<Client> query = manager.createQuery("FROM Client where email= : id", Client.class);
 		query.setParameter("id", emailid);
 		List<Client> list = query.getResultList();
-		if(list.isEmpty()) {
+		if (list.isEmpty()) {
 			manager.close();
 			return null;
-		}
-		else {
+		} else {
 			manager.close();
 			return list.get(0);
 		}
@@ -212,10 +211,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public LoanType updateLoanType(LoanType loantype) {
 		EntityManager manager = factory.createEntityManager();
-		LoanType type = manager.find(LoanType.class, loantype.getLoanTypeId());
+		LoanType type = manager.find(LoanType.class,loantype.getLoanTypeId());
+		System.out.println(loantype.getLoanTypeId());
 		if (type != null) {
 			manager.getTransaction().begin();
-			BeanUtils.copyProperties(loantype, type, "LoanTypeId");
+			BeanUtils.copyProperties(loantype,type,"loanTypeId");
 			manager.getTransaction().commit();
 			manager.close();
 			return type;

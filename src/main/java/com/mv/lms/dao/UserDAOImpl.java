@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Repository;
 
 import com.mv.lms.entities.LoanApplication;
@@ -53,6 +54,22 @@ public class UserDAOImpl implements UserDAO {
 			return userList.get(0);
 		}
 
+	}
+
+	@Override
+	public User updateUser(User user) {
+		EntityManager manager = factory.createEntityManager();
+		User user1 = manager.find(User.class, user.getUserId());
+		System.out.println(user.getUserId());
+		if (user1 != null) {
+			manager.getTransaction().begin();
+			BeanUtils.copyProperties(user, user1, "userId","role","roleId");
+			manager.getTransaction().commit();
+			manager.close();
+			return user1;
+		} else {
+			return null;
+		}
 	}
 
 	@Override

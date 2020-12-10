@@ -30,7 +30,14 @@ public class ClientController {
 		return response;
 	}
 	
-	@ResponseStatus
+	@GetMapping(value = "/loans/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseDTO getAllLoans(@PathVariable Long id) {
+		ResponseDTO response = new ResponseDTO();
+		response.setResponse(service.getAllLoans(id));
+		return response;
+	}
+	
+	
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO getClient(String email) {
 		ResponseDTO response = new ResponseDTO();
@@ -52,6 +59,14 @@ public class ClientController {
 	public ResponseDTO getPaymentDetails(@PathVariable Long id) {
 		ResponseDTO response = new ResponseDTO();
 		response.setResponse(service.getPaymentDetails(id));
+		return response;
+	}
+	
+	@GetMapping(value = "/payments/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public ResponseDTO getAllPaymentDetails(@PathVariable Long id) {
+		ResponseDTO response = new ResponseDTO();
+		response.setResponse(service.getPayments(id));
 		return response;
 	}
 

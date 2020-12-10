@@ -48,11 +48,12 @@ public class ClientDAOImpl implements ClientDAO {
 
 	@Override
 	public Payment makePayment(Payment payment) {
-
 		EntityManager manager = factory.createEntityManager();
-
+		Loan loan = manager.find(Loan.class, payment.getLoanId());
 		manager.getTransaction().begin();
 		manager.persist(payment);
+		loan.setLoanAmount(loan.getLoanAmount() - payment.getAmountPaid());
+		loan.setPendingEmis(loan.getPendingEmis() - 1);
 		manager.getTransaction().commit();
 		return payment;
 	}
@@ -63,6 +64,29 @@ public class ClientDAOImpl implements ClientDAO {
 		Payment payment = manager.find(Payment.class, paymentId);
 		manager.close();
 		return payment;
+	}
+
+	@Override
+	public List<Loan> getAllLoans(Long clientId) {
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<Loan> query = manager.createQuery("FROM Loan where clientId= :id", Loan.class);
+		query.setParameter("id", clientId);
+		List<Loan> loanList = query.getResultList();
+		if (loanList.isEmpty()) {
+			return null;
+		} else {
+			return loanList;
+		}
+	}
+
+	@Override
+	public List<Payment> getPayments(Long loanId) {
+
+		EntityManager manager = factory.createEntityManager();
+		TypedQuery<Payment> query= manager.createQuery("FROM Payment where loanid= :id",Payment.class);
+		query.setParameter("id", loanId);
+		List<Payment> paymentlist = query.getResultList();
+		return paymentlist;
 	}
 
 }

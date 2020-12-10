@@ -16,6 +16,8 @@ public interface UserDAO {
 
 	public User getUser(String userEmail);
 	
+	public User updateUser(User user);
+	
 	public LoanStatus getApplicationStatus(long applicationId);
 	
 	public User authenticate(String email,String password);

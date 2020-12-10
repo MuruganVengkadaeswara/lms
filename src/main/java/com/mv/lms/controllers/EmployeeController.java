@@ -78,7 +78,7 @@ public class EmployeeController {
 
 	// Loan operations
 
-	@PostMapping(value = "/manage-loans", produces = { MediaType.APPLICATION_JSON_VALUE,
+	@PostMapping(value = "/loans", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO addLoan(@RequestBody Loan loan) {
 		ResponseDTO response = new ResponseDTO();
@@ -93,7 +93,7 @@ public class EmployeeController {
 		return response;
 	}
 
-	@PutMapping(value = "/manage-loans", produces = { MediaType.APPLICATION_JSON_VALUE,
+	@PutMapping(value = "/loans", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO updateLoanDetails(@RequestBody Loan loan) {
 		ResponseDTO response = new ResponseDTO();
@@ -101,7 +101,7 @@ public class EmployeeController {
 		return response;
 	}
 
-	@DeleteMapping(value = "/manage-loans/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
+	@DeleteMapping(value = "/loans/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO deleteLoanDetails(@PathVariable Long id) {
 		ResponseDTO response = new ResponseDTO();
@@ -110,7 +110,7 @@ public class EmployeeController {
 	}
 	// client operations
 
-	@PostMapping(value = "/manage-clients", produces = { MediaType.APPLICATION_JSON_VALUE,
+	@PostMapping(value = "/client", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO addClient(@RequestBody Client client) {
 		ResponseDTO response = new ResponseDTO();
@@ -118,8 +118,7 @@ public class EmployeeController {
 		return response;
 	}
 
-	@PutMapping(value = "/manage-clients", produces = { MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE })
+	@PutMapping(value = "/client", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO updateClient(@RequestBody Client client) {
 		ResponseDTO response = new ResponseDTO();
 		response.setResponse(service.updateClient(client));
@@ -127,7 +126,7 @@ public class EmployeeController {
 
 	}
 
-	@DeleteMapping(value = "/manage-clients/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
+	@DeleteMapping(value = "/clients/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO deleteClient(@PathVariable Long id) {
 		ResponseDTO response = new ResponseDTO();
@@ -135,7 +134,7 @@ public class EmployeeController {
 		return response;
 	}
 
-	@GetMapping(value = "/client/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
+	@GetMapping(value = "/clients/{id}", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public ResponseDTO getClient(@PathVariable long id) {
 		ResponseDTO response = new ResponseDTO();
@@ -150,14 +149,14 @@ public class EmployeeController {
 		return response;
 
 	}
-	
-//	@GetMapping(value = "/clients/{email}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-//	public ResponseDTO getClientByEmail() {
-//		ResponseDTO response = new ResponseDTO(@PathVariable String email);
-//		response.setResponse(service.getAllClients());
-//		return response;
-//
-//	}
+
+	@GetMapping(value = "/client", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseDTO getClientByEmail(String email) {
+		ResponseDTO response = new ResponseDTO();
+		response.setResponse(service.getClientByEmail(email));
+		return response;
+
+	}
 
 	// Loan types operations
 
@@ -169,7 +168,7 @@ public class EmployeeController {
 	}
 
 	@PutMapping(value = "/loantype", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseDTO updateLoanType(LoanType type) {
+	public ResponseDTO updateLoanType(@RequestBody LoanType type) {
 		ResponseDTO response = new ResponseDTO();
 		response.setResponse(service.updateLoanType(type));
 		return response;

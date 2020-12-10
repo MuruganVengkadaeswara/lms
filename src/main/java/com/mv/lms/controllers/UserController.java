@@ -1,27 +1,22 @@
 package com.mv.lms.controllers;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.annotation.SessionScope;
 
 import com.mv.lms.dto.ResponseDTO;
-import com.mv.lms.dto.UserDTO;
 import com.mv.lms.entities.LoanApplication;
 import com.mv.lms.entities.User;
 import com.mv.lms.service.UserService;
@@ -58,6 +53,13 @@ public class UserController {
 	public ResponseDTO getUser(String userEmail) {
 		ResponseDTO response = new ResponseDTO();
 		response.setResponse(service.getUser(userEmail));
+		return response;
+	}
+
+	@PutMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseDTO updateUser(@RequestBody User user) {
+		ResponseDTO response = new ResponseDTO();
+		response.setResponse(service.updateUser(user));
 		return response;
 	}
 
