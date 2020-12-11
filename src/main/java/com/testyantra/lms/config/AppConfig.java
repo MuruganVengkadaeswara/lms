@@ -7,7 +7,7 @@ import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages = "com.mv.lms")
+@ComponentScan(basePackages = "com.testyantra.lms")
 @EnableWebMvc
 public class AppConfig {
 
